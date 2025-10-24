@@ -1,0 +1,57 @@
+@using ContractClaimSystem.Web.Models
+@{
+    ViewData["Title"] = "Dashboard";
+    var role = ViewBag.CurrentRole as UserRole? ?? UserRole.Lecturer;
+}
+@if(TempData["Error"] != null){ <div class="alert error">@TempData["Error"]</div> }
+@if(TempData["Success"] != null){ <div class="alert success">@TempData["Success"]</div> }
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <h3>Submitted</h3>
+      <p>Total claims submitted.</p>
+      <div class="badge">@ViewBag.Submitted</div>
+      <div style="margin-top:10px"><a class="btn outline" asp-controller="Claim" asp-action="List">View All</a></div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <h3>Pending</h3>
+      <p>Claims awaiting verification.</p>
+      <div class="badge pending">@ViewBag.Pending</div>
+      <div style="margin-top:10px">
+        @if (role == UserRole.Coordinator || role == UserRole.Manager) {
+          <a class="btn" asp-controller="Approval" asp-action="Index">Review Pending</a>
+        } else {
+          <a class="btn outline" asp-controller="Claim" asp-action="List">My Claims</a>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <h3>Approved</h3>
+      <p>Approved claims.</p>
+      <div class="badge approved">@ViewBag.Approved</div>
+      <div style="margin-top:10px"><a class="btn outline" asp-controller="Claim" asp-action="List">View</a></div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <h3>Rejected</h3>
+      <p>Rejected claims.</p>
+      <div class="badge rejected">@ViewBag.Rejected</div>
+      <div style="margin-top:10px"><a class="btn outline" asp-controller="Claim" asp-action="List">View</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Quick Actions</h3>
+  <p>Use the role switcher (top-right) to demo Lecturer vs Coordinator/Manager behavior.</p>
+  <a class="btn" asp-controller="Claim" asp-action="Submit">Submit a Claim</a>
+  @if (role == UserRole.Coordinator || role == UserRole.Manager){
+    <a class="btn outline" style="margin-left:8px" asp-controller="Approval" asp-action="Index">Go to Approvals</a>
+  }
+</div>

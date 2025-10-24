@@ -1,0 +1,33 @@
+@model IEnumerable<ContractClaimSystem.Web.Models.Claim>
+@{
+    ViewData["Title"] = "Approvals";
+}
+@if(TempData["Error"] != null){ <div class="alert error">@TempData["Error"]</div> }
+@if(TempData["Success"] != null){ <div class="alert success">@TempData["Success"]</div> }
+
+<div class="card">
+  <h2>Pending Claims</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th><th>Lecturer</th><th>Hours</th><th>Rate</th><th>Total</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var c in Model){
+        <tr>
+          <td>@c.Id</td>
+          <td>@c.LecturerName</td>
+          <td>@c.HoursWorked</td>
+          <td>R @c.HourlyRate.ToString("0.00")</td>
+          <td><strong>R @c.TotalAmount.ToString("0.00")</strong></td>
+          <td>@c.Status</td>
+          <td>
+            <form asp-action="Approve" method="post" style="display:inline">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@c.Id" /><button class="btn" type="submit">Approve</button></form>
+            <form asp-action="Reject" method="post" style="display:inline;margin-left:6px">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@c.Id" /><button class="btn outline" type="submit">Reject</button></form>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

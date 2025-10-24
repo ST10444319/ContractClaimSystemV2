@@ -1,0 +1,30 @@
+:root{--navy:#0a1a2f;--gold:#d4af37;--light:#f8f9fc;--text:#0a1a2f}
+*{box-sizing:border-box} html,body{height:100%}
+body{display:flex;flex-direction:column;font-family:'Segoe UI',Arial,sans-serif;margin:0;background:var(--light);color:var(--text)}
+header{background:var(--navy);color:#fff;border-bottom:2px solid var(--gold)}
+.navbar{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:14px 20px}
+.navbar a{color:var(--gold);text-decoration:none;margin-right:16px;font-weight:600}
+.navbar a:hover{color:#fff}
+main.container{flex:1;max-width:1100px;margin:24px auto;padding:0 20px;width:100%}
+.card{background:#fff;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.08);padding:20px;margin-bottom:18px;border:1px solid rgba(10,26,47,.06)}
+.btn{display:inline-block;background:var(--gold);color:var(--navy);padding:10px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+.btn.outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.btn:hover{filter:brightness(.95);color:#fff}
+.input,.textarea{width:100%;padding:10px 12px;border:1px solid #d6d9de;border-radius:8px}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.col{flex:1 1 260px}
+.footer{background:var(--navy);color:var(--gold);text-align:center;padding:14px;border-top:2px solid var(--gold);position:sticky;bottom:0;margin-top:auto}
+.badge{display:inline-block;padding:4px 8px;border-radius:8px;font-weight:700}
+.badge.pending{background:#fff3cd;color:#856404;border:1px solid #ffeeba}
+.badge.approved{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.badge.rejected{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.progress{height:10px;background:#e9ecef;border-radius:8px;overflow:hidden}
+.progress>div{height:100%;background:var(--gold)}
+.table{width:100%;border-collapse:separate;border-spacing:0 10px}
+.table th,.table td{padding:12px 14px;background:#fff;border-top:1px solid #e9ecef;border-bottom:1px solid #e9ecef}
+.table th{background:#0a1a2f;color:#fff}
+.alert{padding:12px 14px;border-radius:8px;margin-bottom:12px}
+.alert.error{background:#fdecea;color:#611a15;border:1px solid #f5c6cb}
+.alert.success{background:#edf7ed;color:#1e4620;border:1px solid #c3e6cb}
+.role-switch{display:flex;align-items:center;gap:8px;color:#fff}
+.role-switch select{background:#0f2744;color:#fff;border:1px solid var(--gold);border-radius:8px;padding:6px}

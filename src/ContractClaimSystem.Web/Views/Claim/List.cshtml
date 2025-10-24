@@ -1,0 +1,28 @@
+@model IEnumerable<ContractClaimSystem.Web.Models.Claim>
+@using ContractClaimSystem.Web.Models
+@{
+    ViewData["Title"] = "My Claims";
+}
+<div class="card">
+  <h2>All Claims</h2>
+  <table class="table">
+    <thead>
+      <tr><th>#</th><th>Lecturer</th><th>Hours</th><th>Rate</th><th>Total</th><th>Status</th><th>Created</th><th></th></tr>
+    </thead>
+    <tbody>
+      @foreach (var c in Model){
+        var cls = c.Status==ClaimStatus.Approved? "approved" : c.Status==ClaimStatus.Rejected? "rejected":"pending";
+        <tr>
+          <td>@c.Id</td>
+          <td>@c.LecturerName</td>
+          <td>@c.HoursWorked</td>
+          <td>R @c.HourlyRate.ToString("0.00")</td>
+          <td><strong>R @c.TotalAmount.ToString("0.00")</strong></td>
+          <td><span class="badge @cls">@c.Status</span></td>
+          <td>@c.CreatedAt.ToLocalTime()</td>
+          <td><a class="btn outline" asp-action="Status" asp-route-id="@c.Id">View</a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

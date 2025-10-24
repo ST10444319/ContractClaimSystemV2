@@ -1,0 +1,30 @@
+@model ContractClaimSystem.Web.Models.Claim
+@using ContractClaimSystem.Web.Models
+@{
+    ViewData["Title"] = "Claim Status";
+    int pct = Model.Status switch {
+        ClaimStatus.Pending => 25,
+        ClaimStatus.Verified => 50,
+        ClaimStatus.Approved => 75,
+        ClaimStatus.Settled => 100,
+        ClaimStatus.Rejected => 100,
+        _ => 0
+    };
+}
+<div class="card">
+  <h2>Claim #@Model.Id — <span class="badge @(Model.Status==ClaimStatus.Approved? "approved" : Model.Status==ClaimStatus.Rejected? "rejected":"pending")">@Model.Status</span></h2>
+  <p><strong>Lecturer:</strong> @Model.LecturerName</p>
+  <p><strong>Amount:</strong> R @Model.TotalAmount.ToString("0.00")</p>
+  <div class="progress"><div style="width:@pct%"></div></div>
+
+  <h3 style="margin-top:16px">Documents</h3>
+  @if(Model.Documents?.Any() == true){
+    <ul>
+      @foreach(var d in Model.Documents){
+        <li><a href="@d.FilePath" target="_blank">@d.FileName</a> <small>(@d.UploadedAt.ToLocalTime())</small></li>
+      }
+    </ul>
+  } else {
+    <p class="text-muted">No documents uploaded.</p>
+  }
+</div>

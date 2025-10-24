@@ -1,0 +1,58 @@
+@inject ContractClaimSystem.Web.Services.IRoleContext RoleCtx
+@using ContractClaimSystem.Web.Models
+@{
+    var currentRole = RoleCtx.GetCurrentRole(Context);
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - Contract Claim System</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div><a asp-controller="Home" asp-action="Index" style="font-size:1.1rem">ContractClaim</a></div>
+            <nav>
+                <a asp-controller="Home" asp-action="Index">Dashboard</a>
+
+                @if (currentRole == UserRole.Lecturer)
+                {
+                    <a asp-controller="Claim" asp-action="Submit">Submit Claim</a>
+                    <a asp-controller="Claim" asp-action="List">My Claims</a>
+                }
+
+                @if (currentRole == UserRole.Coordinator || currentRole == UserRole.Manager)
+                {
+                    <a asp-controller="Approval" asp-action="Index">Approvals</a>
+                }
+            </nav>
+
+            <div class="role-switch">
+                <form asp-controller="Role" asp-action="Set" method="post">
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <label>Role</label>
+                    <select name="role" onchange="this.form.submit()">
+                        <option value="Lecturer" selected="@(currentRole == UserRole.Lecturer)">Lecturer</option>
+                        <option value="Coordinator" selected="@(currentRole == UserRole.Coordinator)">Coordinator</option>
+                        <option value="Manager" selected="@(currentRole == UserRole.Manager)">Manager</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        &copy; @DateTime.Now.Year - Contract Monthly Claim System
+    </footer>
+
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
