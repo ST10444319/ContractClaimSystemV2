@@ -17,7 +17,7 @@ namespace ContractClaimSystem.Web.Controllers
         public IActionResult Set(UserRole role, string? returnUrl = null)
         {
             _rc.SetRole(HttpContext, role);
-            TempData["Success"] = $"Switched role to {role} (demo).";
+            TempData["Success"] = $"Switched role to {role}";
 
             return Redirect(returnUrl ?? Url.Action("Index", "Home")!);
         }
