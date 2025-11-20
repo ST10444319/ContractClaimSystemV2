@@ -42,6 +42,9 @@ namespace ContractClaimSystem.Web.Controllers
                 }
 
                 model.Status = ClaimStatus.Pending;
+
+                RunAutoValidation(model);
+
                 _db.Claims.Add(model);
                 await _db.SaveChangesAsync();
 
@@ -113,5 +116,27 @@ namespace ContractClaimSystem.Web.Controllers
 
             return View(claims);
         }
+
+        private void RunAutoValidation(Claim claim)
+        {
+            // Simple rule examples – adjust to match your institution’s policy
+            var issues = new List<string>();
+
+            if (claim.HoursWorked > 160)
+                issues.Add("Hours worked exceed the normal monthly limit (160).");
+
+            if (claim.HourlyRate < 100 || claim.HourlyRate > 800)
+                issues.Add("Hourly rate is outside the expected range (100–800).");
+
+            if (string.IsNullOrWhiteSpace(claim.Notes))
+                issues.Add("No description / notes provided for this claim.");
+
+            claim.IsAutoFlagged = issues.Any();
+            claim.AutoValidationNotes = issues.Any()
+                ? string.Join(" ", issues)
+                : "No automatic issues detected.";
+        }
+
     }
+
 }
