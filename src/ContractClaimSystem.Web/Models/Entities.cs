@@ -25,6 +25,9 @@ namespace ContractClaimSystem.Web.Models
         [NotMapped]
         public decimal TotalAmount => HoursWorked * HourlyRate;
 
+        public bool IsAutoFlagged { get; set; } = false;
+        public string? AutoValidationNotes { get; set; }
+
         public ICollection<Document> Documents { get; set; } = new List<Document>();
     }
 

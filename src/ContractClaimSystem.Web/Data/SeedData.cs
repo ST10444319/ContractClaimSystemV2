@@ -15,21 +15,27 @@ namespace ContractClaimSystem.Web.Data
                 db.Users.AddRange(
                     new AppUser
                     {
-                        FullName = "Demo Lecturer",
-                        Email = "lecturer@demo.local",
+                        FullName = "Mike Masinga",
+                        Email = "Mike@gmail.com",
                         Role = UserRole.Lecturer
                     },
                     new AppUser
                     {
-                        FullName = "Demo Coordinator",
-                        Email = "coord@demo.local",
+                        FullName = "Lungile Ngwenya",
+                        Email = "LNgwenya@gmail.com",
                         Role = UserRole.Coordinator
                     },
                     new AppUser
                     {
-                        FullName = "Demo Manager",
-                        Email = "manager@demo.local",
+                        FullName = "Brown Mokgotsi",
+                        Email = "MokgotsiB@gmail.com",
                         Role = UserRole.Manager
+                    },
+                    new AppUser
+                    {
+                        FullName = "Jan Van De Merwe",
+                        Email = "J.DeMerwe@gmail.com",
+                        Role = UserRole.HR
                     }
                 );
             }
@@ -40,7 +46,7 @@ namespace ContractClaimSystem.Web.Data
                 db.Claims.AddRange(
                     new Claim
                     {
-                        LecturerName = "Demo Lecturer",
+                        LecturerName = "Brown Mokgotsi",
                         HoursWorked = 8,
                         HourlyRate = 500,
                         Notes = "CS101 Lectures",
@@ -48,7 +54,7 @@ namespace ContractClaimSystem.Web.Data
                     },
                     new Claim
                     {
-                        LecturerName = "Demo Lecturer",
+                        LecturerName = "Shadrek Sibiya",
                         HoursWorked = 5,
                         HourlyRate = 450,
                         Notes = "Tutorials",
@@ -56,7 +62,7 @@ namespace ContractClaimSystem.Web.Data
                     },
                     new Claim
                     {
-                        LecturerName = "Demo Lecturer",
+                        LecturerName = "General Mkwanazi",
                         HoursWorked = 6,
                         HourlyRate = 450,
                         Notes = "Labs",

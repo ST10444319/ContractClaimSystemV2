@@ -13,6 +13,7 @@ namespace ContractClaimSystem.Web.Models
     {
         Lecturer,
         Coordinator,
-        Manager
+        Manager,
+        HR
     }
 }
