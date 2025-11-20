@@ -28,6 +28,11 @@
                 {
                     <a asp-controller="Approval" asp-action="Index">Approvals</a>
                 }
+
+                @if (currentRole == UserRole.HR)
+                {
+                    <a asp-controller="HR" asp-action="Index">HR Dashboard</a>
+                }
             </nav>
 
             <div class="role-switch">
@@ -38,6 +43,7 @@
                         <option value="Lecturer" selected="@(currentRole == UserRole.Lecturer)">Lecturer</option>
                         <option value="Coordinator" selected="@(currentRole == UserRole.Coordinator)">Coordinator</option>
                         <option value="Manager" selected="@(currentRole == UserRole.Manager)">Manager</option>
+                        <option value="HR" selected="@(currentRole == UserRole.HR)">HR</option>
                     </select>
                 </form>
             </div>

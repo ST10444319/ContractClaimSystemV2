@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ContractClaimSystem.Web.Controllers.HRController.HrSummaryRow>
+@{
+    ViewData["Title"] = "HR Dashboard";
+}
+
+<div class="card">
+    <h2>HR – Claim Overview</h2>
+    <p>Summary of claim processing per lecturer.</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Lecturer</th>
+                <th>Total Claims</th>
+                <th>Approved</th>
+                <th>Rejected</th>
+                <th>Total Approved Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model)
+            {
+                <tr>
+                    <td>@row.LecturerName</td>
+                    <td>@row.TotalClaims</td>
+                    <td>@row.ApprovedClaims</td>
+                    <td>@row.RejectedClaims</td>
+                    <td>R @row.TotalApprovedAmount.ToString("0.00")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div style="margin-top:16px;">
+        <a class="btn" asp-action="ExportApproved">Export Approved Claims (CSV)</a>
+    </div>
+</div>
